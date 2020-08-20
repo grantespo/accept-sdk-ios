@@ -17,7 +17,7 @@ import Foundation
     public var rawValue: RawValue {
         switch self {
         case .ENV_LIVE:
-            return "api.authorize.net"
+            return "api2.authorize.net"
         case .ENV_TEST:
             return "apitest.authorize.net"
         }
@@ -25,7 +25,7 @@ import Foundation
     
     public init?(rawValue: RawValue) {
         switch rawValue {
-        case "api.authorize.net":
+        case "api2.authorize.net":
             self = .ENV_LIVE
         case "apitest.authorize.net":
             self = .ENV_TEST

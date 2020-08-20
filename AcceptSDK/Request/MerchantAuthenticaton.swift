@@ -12,17 +12,17 @@ import Foundation
 open class MerchantAuthenticaton: NSObject {
     @objc open var name = String()
     @objc open var fingerPrint: FingerPrint?
-    @objc open var clientKey: String?
+    @objc open var transactionKey: String?
     @objc open var mobileDeviceId:String?
     
     @objc func validate(_ successHandler:@escaping (_ isSuccess:Bool)->(),failureHandler:@escaping (_ withResponse:AcceptSDKErrorResponse)->()) {
         
-        if ((self.clientKey?.isEmpty) == nil && self.fingerPrint == nil) {
+        if ((self.transactionKey?.isEmpty) == nil && self.fingerPrint == nil) {
             failureHandler(self.getSDKErrorResponse("E_WC_18", message: "Client key is required."))
             return
         }
         
-        if let key = self.clientKey {
+        if let key = self.transactionKey {
             //todo change this..redundant check
             if key.count > 0 {
                 if let errorResponse = self.validateOptionalFileds(self.name, inDeviceId: self.mobileDeviceId) {

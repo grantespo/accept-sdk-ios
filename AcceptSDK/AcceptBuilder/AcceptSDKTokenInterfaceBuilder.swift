@@ -12,7 +12,7 @@ struct AcceptSDKTokenAPIRequest{
     static let kSecurePaymentContainerRequestKey    = "securePaymentContainerRequest"
     static let kMerchantAuthenticationKey           = "merchantAuthentication"
     static let kNameKey                             = "name"
-    static let kClientKeyKey                        = "clientKey"
+    static let kTransactionKeyKey                   = "transactionKey"
     static let kDataKey                             = "data"
     static let kTypeKey                             = "type"
     static let kIdKey                               = "id"
@@ -34,7 +34,7 @@ struct AcceptSDKTokenAPIRequest{
 class AcceptSDKTokenInterfaceBuilder: AcceptSDKBaseInterfaceBuilder {
     
     var name:String?
-    var clientKey:String?
+    var transactionKey:String?
     var requestType:String?
     var merchantId:String?
     var cardNumber:String?
@@ -45,8 +45,8 @@ class AcceptSDKTokenInterfaceBuilder: AcceptSDKBaseInterfaceBuilder {
         return self
     }
 
-    func withClientKey(_ inClientKey:String)-> Self {
-        self.clientKey = inClientKey
+    func withTransactionKey(_ inTransactionKey:String)-> Self {
+        self.transactionKey = inTransactionKey
         return self
     }
 
@@ -85,9 +85,9 @@ class AcceptSDKTokenInterfaceBuilder: AcceptSDKBaseInterfaceBuilder {
         var fingerPrintArrayStr = String()
         var fingerPrintDictKeyValueStr = String()
         
-        var clientKeyValueStr = String()
-        if let clientStr = request.merchantAuthentication.clientKey {
-            clientKeyValueStr = self.createJSONString(AcceptSDKTokenAPIRequest.kClientKeyKey, value: clientStr)
+        var transactionKeyValueStr = String()
+        if let clientStr = request.merchantAuthentication.transactionKey {
+            transactionKeyValueStr = self.createJSONString(AcceptSDKTokenAPIRequest.kTransactionKeyKey, value: clientStr)
         } else {
             var sequenceStr = String()
             var currenctCodeStr = String()
@@ -116,7 +116,7 @@ class AcceptSDKTokenInterfaceBuilder: AcceptSDKBaseInterfaceBuilder {
         
         var authenticationArrayStr = String()
         
-        authenticationArrayStr = self.createJSONArray(NSArray(arrayLiteral: nameKeyValueStr, clientKeyValueStr, fingerPrintDictKeyValueStr) as! Array<String>)
+        authenticationArrayStr = self.createJSONArray(NSArray(arrayLiteral: nameKeyValueStr, transactionKeyValueStr, fingerPrintDictKeyValueStr) as! Array<String>)
         
         let merchantAuthenticationDictStr = self.createJSONDict(AcceptSDKTokenAPIRequest.kMerchantAuthenticationKey, valueString: authenticationArrayStr)
         
