@@ -162,7 +162,7 @@ class MerchantAuthenticationTests: XCTestCase {
     func getValidMerchantAuthentication() -> MerchantAuthenticaton {
         let request = MerchantAuthenticaton()
         request.name = "ValidName"
-        request.clientKey = "27gshfgjew87efb"
+        request.transactionKey = "27gshfgjew87efb"
         request.mobileDeviceId = "fhhyh-dhdu7un-08790jb"
         request.fingerPrint = self.getValidFingerprintRequest()
 
